@@ -1,0 +1,832 @@
+     1→'use client';
+     2→
+     3→import { useState, useEffect, useRef } from 'react';
+     4→import Image from 'next/image';
+     5→import {
+     6→  Phone,
+     7→  Mail,
+     8→  MapPin,
+     9→  ChevronDown,
+    10→  Star,
+    11→  Menu,
+    12→  X,
+    13→  ArrowUp,
+    14→  Clock,
+    15→  CheckCircle,
+    16→} from 'lucide-react';
+    17→
+    18→/* ────────────────────────────────────────────
+    19→   NAVIGATION DATA
+    20→   ──────────────────────────────────────────── */
+    21→const NAV_LINKS = [
+    22→  { label: 'Accueil', href: '#accueil' },
+    23→  { label: 'Signalétique', href: '#services' },
+    24→  { label: 'Enseignes déployantes', href: '#services' },
+    25→  { label: 'Habillage & Covering', href: '#services' },
+    26→  { label: 'Aménagement', href: '#services' },
+    27→  { label: 'Stores & Bannes', href: '#services' },
+    28→  { label: 'Identification', href: '#services' },
+    29→  { label: 'Contact', href: '#contact' },
+    30→];
+    31→
+    32→/* ────────────────────────────────────────────
+    33→   SERVICES DATA
+    34→   ──────────────────────────────────────────── */
+    35→const SERVICES = [
+    36→  {
+    37→    title: 'Signalétique & Enseignes',
+    38→    desc: "Conception, fabrication et pose d'enseignes professionnelles sur mesure pour donner vie à votre identité de marque.",
+    39→    img: '/branding-creations.png',
+    40→    tag: 'Enseignes',
+    41→  },
+    42→  {
+    43→    title: 'Enseignes Déployantes',
+    44→    desc: "Des enseignes à bras déployant, légères et résistantes, idéales pour capter l'attention en toute circonstance.",
+    45→    img: '/branding-communication.png',
+    46→    tag: 'Déployantes',
+    47→  },
+    48→  {
+    49→    title: 'Habillage Véhicule',
+    50→    desc: 'Transformez vos véhicules en supports publicitaires mobiles grâce à nos solutions de covering haute définition.',
+    51→    img: '/branding-digital.png',
+    52→    tag: 'Covering',
+    53→  },
+    54→  {
+    55→    title: 'Habillage Mural & Façade',
+    56→    desc: 'Mettez en valeur vos surfaces avec des habillages muraux percutants qui renforcent votre présence locale.',
+    57→    img: '/branding-creations.png',
+    58→    tag: 'Mural',
+    59→  },
+    60→  {
+    61→    title: 'Stores & Bannes',
+    62→    desc: 'Stores commerciaux et bannes publicitaires personnalisés, alliant esthétique et protection solaire.',
+    63→    img: '/branding-communication.png',
+    64→    tag: 'Stores',
+    65→  },
+    66→  {
+    67→    title: 'Plaques & Identification',
+    68→    desc: 'Plaques professionnelles, signalétique intérieure et extérieure pour une identification claire et durable.',
+    69→    img: '/branding-digital.png',
+    70→    tag: 'Identification',
+    71→  },
+    72→  {
+    73→    title: "Aménagement d'Espaces",
+    74→    desc: "Agencement de stands, vitrines et espaces commerciaux pour sublimer votre activité et attirer la clientèle.",
+    75→    img: '/branding-creations.png',
+    76→    tag: 'Aménagement',
+    77→  },
+    78→  {
+    79→    title: 'Stand & Événementiel',
+    80→    desc: 'Conception et montage de stands pour salons, foires et événements professionnels avec un rendu soigné.',
+    81→    img: '/branding-communication.png',
+    82→    tag: 'Événementiel',
+    83→  },
+    84→];
+    85→
+    86→/* ────────────────────────────────────────────
+    87→   REVIEWS DATA
+    88→   ──────────────────────────────────────────── */
+    89→const REVIEWS = [
+    90→  {
+    91→    name: 'Karim B.',
+    92→    text: "Excellent travail sur la signalétique de mon commerce. L'équipe est réactive, à l'écoute et le résultat dépasse mes attentes. Je recommande vivement art&fact !",
+    93→    rating: 5,
+    94→  },
+    95→  {
+    96→    name: 'Sara M.',
+    97→    text: 'Habillage véhicule impeccable avec une finition de qualité. Le rendu est fidèle au projet et la pose a été réalisée dans les délais convenus.',
+    98→    rating: 5,
+    99→  },
+   100→  {
+   101→    name: 'Yacine L.',
+   102→    text: "Nous avons fait appel à art&fact pour l'aménagement de notre stand à la foire de Tipaza. Un travail soigné, professionnel et un suivi impeccable.",
+   103→    rating: 5,
+   104→  },
+   105→  {
+   106→    name: 'Amina H.',
+   107→    text: 'La plaque professionnelle réalisée par art&fact est magnifique. Matériaux de qualité, gravure précise et livraison rapide. Merci pour ce travail !',
+   108→    rating: 5,
+   109→  },
+   110→  {
+   111→    name: 'Mehdi R.',
+   112→    text: 'Très satisfaite de mon enseigne lumineuse. L\'effet de nuit est superbe et l\'installation a été faite proprement. Service au top !',
+   113→    rating: 5,
+   114→  },
+   115→  {
+   116→    name: 'Nadia F.',
+   117→    text: 'Art&fact a transformé la façade de notre boutique avec un habillage mural moderne et élégant. Nos clients remarquent la différence !',
+   118→    rating: 5,
+   119→  },
+   120→];
+   121→
+   122→/* ────────────────────────────────────────────
+   123→   FOOTER SERVICE LINKS
+   124→   ──────────────────────────────────────────── */
+   125→const FOOTER_SERVICES = [
+   126→  "Création d'enseigne",
+   127→  'Installation store commerce',
+   128→  'Enseigne de magasin',
+   129→  'Habillage mural',
+   130→  'Enseigne lumineuse',
+   131→  'Habillage véhicule',
+   132→  'Enseigne sur mesure',
+   133→  'Habillage commerce',
+   134→  'Enseigne déployante',
+   135→  'Aménagement de stand',
+   136→  'Création plaque professionnelle',
+   137→  'Création store sur mesure',
+   138→  'Installation enseigne',
+   139→  'Signalétique intérieure',
+   140→];
+   141→
+   142→/* ────────────────────────────────────────────
+   143→   COMPONENT
+   144→   ──────────────────────────────────────────── */
+   145→export default function HomePage() {
+   146→  const [mobileOpen, setMobileOpen] = useState(false);
+   147→  const [scrolled, setScrolled] = useState(false);
+   148→  const [showTop, setShowTop] = useState(false);
+   149→  const [activeReviewPage, setActiveReviewPage] = useState(0);
+   150→  const topRef = useRef<HTMLDivElement>(null);
+   151→
+   152→  useEffect(() => {
+   153→    const onScroll = () => {
+   154→      setScrolled(window.scrollY > 80);
+   155→      setShowTop(window.scrollY > 600);
+   156→    };
+   157→    window.addEventListener('scroll', onScroll, { passive: true });
+   158→    return () => window.removeEventListener('scroll', onScroll);
+   159→  }, []);
+   160→
+   161→  useEffect(() => {
+   162→    const timer = setInterval(() => {
+   163→      setActiveReviewPage((p) => (p + 1) % Math.ceil(REVIEWS.length / 3));
+   164→    }, 5000);
+   165→    return () => clearInterval(timer);
+   166→  }, []);
+   167→
+   168→  const reviewsPerPage = 3;
+   169→  const totalPages = Math.ceil(REVIEWS.length / reviewsPerPage);
+   170→  const currentReviews = REVIEWS.slice(
+   171→    activeReviewPage * reviewsPerPage,
+   172→    activeReviewPage * reviewsPerPage + reviewsPerPage
+   173→  );
+   174→
+   175→  return (
+   176→    <div ref={topRef} className="min-h-screen flex flex-col bg-white text-gray-900">
+   177→      {/* ═══════════ STICKY NAV ═══════════ */}
+   178→      <header
+   179→        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+   180→          scrolled
+   181→            ? 'bg-white/95 backdrop-blur-md shadow-md'
+   182→            : 'bg-white'
+   183→        }`}
+   184→      >
+   185→        <nav className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16 sm:h-20">
+   186→          {/* Logo */}
+   187→          <a href="#accueil" className="flex items-center gap-3 group">
+   188→            <div className="relative w-10 h-10 sm:w-12 sm:h-12">
+   189→              <Image
+   190→                src="/branding-digital.png"
+   191→                alt="art&fact logo"
+   192→                fill
+   193→                className="object-contain"
+   194→                priority
+   195→              />
+   196→            </div>
+   197→            <div className="flex flex-col leading-tight">
+   198→              <span className="text-xl sm:text-2xl font-bold tracking-tight text-red-600">
+   199→                art<span className="text-gray-800">&amp;fact</span>
+   200→              </span>
+   201→              <span className="text-[10px] sm:text-xs text-gray-500 tracking-wide uppercase">
+   202→                Communication visuelle
+   203→              </span>
+   204→            </div>
+   205→          </a>
+   206→
+   207→          {/* Desktop nav */}
+   208→          <ul className="hidden lg:flex items-center gap-6 xl:gap-8">
+   209→            {NAV_LINKS.map((link) => (
+   210→              <li key={link.label}>
+   211→                <a
+   212→                  href={link.href}
+   213→                  className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-red-600 after:transition-all hover:after:w-full"
+   214→                >
+   215→                  {link.label}
+   216→                </a>
+   217→              </li>
+   218→            ))}
+   219→          </ul>
+   220→
+   221→          {/* Desktop CTA */}
+   222→          <a
+   223→            href="tel:+213555123456"
+   224→            className="hidden lg:flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors"
+   225→          >
+   226→            <Phone className="w-4 h-4" />
+   227→            Nous appeler
+   228→          </a>
+   229→
+   230→          {/* Mobile toggle */}
+   231→          <button
+   232→            onClick={() => setMobileOpen(!mobileOpen)}
+   233→            className="lg:hidden p-2 text-gray-700"
+   234→            aria-label="Menu"
+   235→          >
+   236→            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+   237→          </button>
+   238→        </nav>
+   239→
+   240→        {/* Mobile menu */}
+   241→        {mobileOpen && (
+   242→          <div className="lg:hidden bg-white border-t border-gray-100 shadow-lg">
+   243→            <ul className="flex flex-col px-4 py-4 gap-1">
+   244→              {NAV_LINKS.map((link) => (
+   245→                <li key={link.label}>
+   246→                  <a
+   247→                    href={link.href}
+   248→                    onClick={() => setMobileOpen(false)}
+   249→                    className="block py-3 px-3 text-sm font-medium text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+   250→                  >
+   251→                    {link.label}
+   252→                  </a>
+   253→                </li>
+   254→              ))}
+   255→              <li className="pt-3 border-t border-gray-100">
+   256→                <a
+   257→                  href="tel:+213555123456"
+   258→                  className="flex items-center gap-2 justify-center bg-red-600 text-white py-3 rounded-lg text-sm font-semibold"
+   259→                >
+   260→                  <Phone className="w-4 h-4" />
+   261→                  Nous appeler
+   262→                </a>
+   263→              </li>
+   264→            </ul>
+   265→          </div>
+   266→        )}
+   267→      </header>
+   268→
+   269→      {/* ═══════════ HERO ═══════════ */}
+   270→      <section
+   271→        id="accueil"
+   272→        className="relative min-h-[100vh] flex items-center justify-center overflow-hidden"
+   273→      >
+   274→        {/* Background */}
+   275→        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+   276→          <div
+   277→            className="absolute inset-0 opacity-30"
+   278→            style={{
+   279→              backgroundImage:
+   280→                'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.08\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
+   281→            }}
+   282→          />
+   283→        </div>
+   284→
+   285→        {/* Red accent bar top */}
+   286→        <div className="absolute top-0 left-0 right-0 h-1.5 bg-red-600" />
+   287→
+   288→        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center pt-20">
+   289→          {/* Branding logos row */}
+   290→          <div className="flex items-center justify-center gap-4 sm:gap-8 mb-10">
+   291→            {['/branding-digital.png', '/branding-creations.png', '/branding-communication.png'].map(
+   292→              (src, i) => (
+   293→                <div
+   294→                  key={i}
+   295→                  className="w-16 h-16 sm:w-20 sm:h-20 relative opacity-80 hover:opacity-100 transition-opacity"
+   296→                >
+   297→                  <Image
+   298→                    src={src}
+   299→                    alt="art&fact branding"
+   300→                    fill
+   301→                    className="object-contain"
+   302→                  />
+   303→                </div>
+   304→              )
+   305→            )}
+   306→          </div>
+   307→
+   308→          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight mb-6">
+   309→            ENSEIGNES, HABILLAGE{' '}
+   310→            <span className="text-red-500">ET</span> COMMUNICATION VISUELLE
+   311→          </h1>
+   312→
+   313→          <p className="text-lg sm:text-xl text-red-400 font-semibold mb-4 tracking-wide">
+   314→            KOLÉA ET LA RÉGION DE TIPAZA
+   315→          </p>
+   316→
+   317→          <p className="max-w-3xl mx-auto text-base sm:text-lg text-gray-300 leading-relaxed mb-10">
+   318→            art&amp;fact conçoit, fabrique et pose des solutions de signalétique
+   319→            pour renforcer la visibilité de votre entreprise, avec un rendu
+   320→            durable, professionnel et soigné.
+   321→          </p>
+   322→
+   323→          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+   324→            <a
+   325→              href="tel:+213555123456"
+   326→              className="flex items-center gap-2 border-2 border-red-500 text-red-400 hover:bg-red-500 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all text-base"
+   327→            >
+   328→              <Phone className="w-5 h-5" />
+   329→              +213 555 123 456
+   330→            </a>
+   331→            <a
+   332→              href="#contact"
+   333→              className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors text-base"
+   334→            >
+   335→              <Mail className="w-5 h-5" />
+   336→              Nous contacter
+   337→            </a>
+   338→          </div>
+   339→
+   340→          {/* Scroll indicator */}
+   341→          <a
+   342→            href="#about"
+   343→            className="inline-flex flex-col items-center mt-16 text-gray-400 hover:text-white transition-colors animate-bounce"
+   344→          >
+   345→            <span className="text-xs mb-1">Découvrir</span>
+   346→            <ChevronDown className="w-6 h-6" />
+   347→          </a>
+   348→        </div>
+   349→      </section>
+   350→
+   351→      {/* ═══════════ ABOUT ═══════════ */}
+   352→      <section id="about" className="py-20 sm:py-28 bg-white">
+   353→        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+   354→          {/* Red top bar */}
+   355→          <div className="w-full h-1.5 bg-red-600 mb-12 rounded-full" />
+   356→
+   357→          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+   358→            {/* Text */}
+   359→            <div>
+   360→              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-red-600 mb-3 leading-tight">
+   361→                VOTRE PARTENAIRE POUR UNE VISIBILITÉ LOCALE DURABLE
+   362→              </h2>
+   363→              <p className="text-gray-400 text-sm sm:text-base mb-6 font-medium">
+   364→                Des réalisations sur mesure, pensées pour attirer et rassurer.
+   365→              </p>
+   366→              <div className="space-y-4 text-gray-600 leading-relaxed text-sm sm:text-base">
+   367→                <p>
+   368→                  Une façade bien identifiée, un message clair et une identité
+   369→                  cohérente font toute la différence. art&amp;fact vous accompagne
+   370→                  de la conception à la pose pour créer une présence visuelle
+   371→                  efficace, adaptée à votre activité et à votre environnement.
+   372→                  Notre approche privilégie la lisibilité, la qualité des
+   373→                  finitions et l&apos;impact, afin que vos supports deviennent de
+   374→                  véritables outils de conversion.
+   375→                </p>
+   376→                <p>
+   377→                  Que vous lanciez votre commerce, modernisiez votre devanture
+   378→                  ou prépariez un événement, nous vous orientons vers la
+   379→                  solution la plus pertinente selon votre budget, vos
+   380→                  contraintes et vos objectifs. Chaque projet est unique et
+   381→                  mérite une attention particulière.
+   382→                </p>
+   383→              </div>
+   384→              <div className="mt-8 flex flex-wrap gap-4">
+   385→                {['Qualité premium', 'Pose incluse', 'Sur mesure'].map(
+   386→                  (item) => (
+   387→                    <span
+   388→                      key={item}
+   389→                      className="flex items-center gap-2 text-sm font-medium text-green-700 bg-green-50 border border-green-200 px-4 py-2 rounded-full"
+   390→                    >
+   391→                      <CheckCircle className="w-4 h-4" />
+   392→                      {item}
+   393→                    </span>
+   394→                  )
+   395→                )}
+   396→              </div>
+   397→            </div>
+   398→
+   399→            {/* Image */}
+   400→            <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]">
+   401→              <Image
+   402→                src="/branding-creations.png"
+   403→                alt="Réalisation art&fact - Signalétique professionnelle"
+   404→                fill
+   405→                className="object-cover"
+   406→              />
+   407→              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+   408→              <div className="absolute bottom-4 left-4 right-4">
+   409→                <span className="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded">
+   410→                  NOS RÉALISATIONS
+   411→                </span>
+   412→              </div>
+   413→            </div>
+   414→          </div>
+   415→        </div>
+   416→      </section>
+   417→
+   418→      {/* ═══════════ SERVICES ═══════════ */}
+   419→      <section id="services" className="py-20 sm:py-28 bg-gray-50">
+   420→        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+   421→          <div className="text-center mb-14">
+   422→            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
+   423→              NOS <span className="text-red-600">DOMAINES</span>{' '}
+   424→              D&apos;EXPERTISE
+   425→            </h2>
+   426→            <p className="text-gray-500 max-w-2xl mx-auto text-sm sm:text-base">
+   427→              Découvrez l&apos;ensemble de nos services de signalétique et
+   428→              communication visuelle, conçus pour répondre à tous vos besoins.
+   429→            </p>
+   430→          </div>
+   431→
+   432→          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+   433→            {SERVICES.map((s, i) => (
+   434→              <div
+   435→                key={i}
+   436→                className="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-red-200"
+   437→              >
+   438→                <div className="relative h-44 overflow-hidden">
+   439→                  <Image
+   440→                    src={s.img}
+   441→                    alt={s.title}
+   442→                    fill
+   443→                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+   444→                  />
+   445→                  <div className="absolute top-3 left-3">
+   446→                    <span className="bg-red-600/90 text-white text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded">
+   447→                      {s.tag}
+   448→                    </span>
+   449→                  </div>
+   450→                </div>
+   451→                <div className="p-5">
+   452→                  <h3 className="font-bold text-gray-900 mb-2 text-sm sm:text-base">
+   453→                    {s.title}
+   454→                  </h3>
+   455→                  <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
+   456→                    {s.desc}
+   457→                  </p>
+   458→                </div>
+   459→              </div>
+   460→            ))}
+   461→          </div>
+   462→        </div>
+   463→      </section>
+   464→
+   465→      {/* ═══════════ WHY CHOOSE US ═══════════ */}
+   466→      <section className="py-20 sm:py-28 bg-white">
+   467→        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+   468→          <div className="text-center mb-14">
+   469→            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
+   470→              POURQUOI <span className="text-red-600">CHOISIR</span> ART&amp;FACT ?
+   471→            </h2>
+   472→          </div>
+   473→
+   474→          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+   475→            {[
+   476→              {
+   477→                icon: '🎯',
+   478→                title: 'Expertise locale',
+   479→                desc: 'Basés à Koléa, nous connaissons les spécificités du marché local et les exigences de la région de Tipaza.',
+   480→              },
+   481→              {
+   482→                icon: '🔧',
+   483→                title: 'Fabrication sur mesure',
+   484→                desc: "Chaque projet est conçu et fabriqué selon vos besoins précis, avec des matériaux de haute qualité.",
+   485→              },
+   486→              {
+   487→                icon: '🚀',
+   488→                title: 'De la conception à la pose',
+   489→                desc: "Nous prenons en charge l'intégralité du processus, de l'idée initiale jusqu'à l'installation finale sur site.",
+   490→              },
+   491→              {
+   492→                icon: '⏱️',
+   493→                title: 'Respect des délais',
+   494→                desc: 'Nous nous engageons à livrer vos projets dans les délais convenus, sans compromis sur la qualité.',
+   495→              },
+   496→              {
+   497→                icon: '💰',
+   498→                title: 'Tarifs compétitifs',
+   499→                desc: 'Des prix justes et transparents, adaptés à votre budget sans sacrifier la qualité du rendu.',
+   500→              },
+   501→              {
+   502→                icon: '🤝',
+   503→                title: 'Suivi personnalisé',
+   504→                desc: 'Un interlocuteur unique vous accompagne tout au long de votre projet pour une communication fluide.',
+   505→              },
+   506→            ].map((item, i) => (
+   507→              <div
+   508→                key={i}
+   509→                className="text-center p-6 rounded-xl bg-gray-50 hover:bg-red-50 transition-colors group"
+   510→              >
+   511→                <div className="text-4xl mb-4">{item.icon}</div>
+   512→                <h3 className="font-bold text-gray-900 mb-2 text-base sm:text-lg">
+   513→                  {item.title}
+   514→                </h3>
+   515→                <p className="text-gray-500 text-sm leading-relaxed">
+   516→                  {item.desc}
+   517→                </p>
+   518→              </div>
+   519→            ))}
+   520→          </div>
+   521→        </div>
+   522→      </section>
+   523→
+   524→      {/* ═══════════ REVIEWS ═══════════ */}
+   525→      <section className="py-20 sm:py-28 bg-gray-50">
+   526→        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+   527→          <div className="text-center mb-12">
+   528→            <div className="flex items-center justify-center gap-2 mb-3">
+   529→              <span className="text-blue-600 font-semibold text-sm sm:text-base">
+   530→                Avis clients
+   531→              </span>
+   532→              <div className="flex items-center gap-0.5">
+   533→                {Array.from({ length: 5 }).map((_, i) => (
+   534→                  <Star
+   535→                    key={i}
+   536→                    className="w-5 h-5 fill-yellow-400 text-yellow-400"
+   537→                  />
+   538→                ))}
+   539→              </div>
+   540→              <span className="text-gray-400 text-sm">({REVIEWS.length})</span>
+   541→            </div>
+   542→            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+   543→              CE QUE DISENT{' '}
+   544→              <span className="text-red-600">NOS CLIENTS</span>
+   545→            </h2>
+   546→          </div>
+   547→
+   548→          {/* Review cards */}
+   549→          <div className="grid md:grid-cols-3 gap-6 mb-8">
+   550→            {currentReviews.map((r, i) => (
+   551→              <div
+   552→                key={`r-${activeReviewPage}-${i}`}
+   553→                className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+   554→              >
+   555→                <div className="flex items-center gap-0.5 mb-3">
+   556→                  {Array.from({ length: r.rating }).map((_, j) => (
+   557→                    <Star
+   558→                      key={j}
+   559→                      className="w-4 h-4 fill-yellow-400 text-yellow-400"
+   560→                    />
+   561→                  ))}
+   562→                </div>
+   563→                <p className="text-gray-600 text-sm leading-relaxed mb-4">
+   564→                  &ldquo;{r.text}&rdquo;
+   565→                </p>
+   566→                <div className="flex items-center gap-3">
+   567→                  <div className="w-9 h-9 rounded-full bg-red-100 flex items-center justify-center">
+   568→                    <span className="text-red-600 font-bold text-sm">
+   569→                      {r.name.charAt(0)}
+   570→                    </span>
+   571→                  </div>
+   572→                  <span className="text-sm font-semibold text-gray-800">
+   573→                    {r.name}
+   574→                  </span>
+   575→                </div>
+   576→              </div>
+   577→            ))}
+   578→          </div>
+   579→
+   580→          {/* Pagination dots */}
+   581→          <div className="flex items-center justify-center gap-2">
+   582→            {Array.from({ length: totalPages }).map((_, i) => (
+   583→              <button
+   584→                key={i}
+   585→                onClick={() => setActiveReviewPage(i)}
+   586→                className={`w-3 h-3 rounded-full transition-all ${
+   587→                  i === activeReviewPage
+   588→                    ? 'bg-red-600 w-8'
+   589→                    : 'bg-gray-300 hover:bg-gray-400'
+   590→                }`}
+   591→                aria-label={`Page ${i + 1}`}
+   592→              />
+   593→            ))}
+   594→          </div>
+   595→        </div>
+   596→      </section>
+   597→
+   598→      {/* ═══════════ CTA BAND ═══════════ */}
+   599→      <section className="bg-red-600 py-12 sm:py-16">
+   600→        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+   601→          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
+   602→            UN PROJET EN TÊTE ?
+   603→          </h2>
+   604→          <p className="text-red-100 text-sm sm:text-base mb-8 max-w-2xl mx-auto">
+   605→            Contactez-nous dès maintenant pour un devis gratuit et
+   606→            personnalisé. Notre équipe se fera un plaisir de vous accompagner
+   607→            dans la réalisation de votre projet.
+   608→          </p>
+   609→          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+   610→            <a
+   611→              href="#contact"
+   612→              className="bg-white text-red-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-bold transition-colors text-base"
+   613→            >
+   614→              Demander un devis
+   615→            </a>
+   616→            <a
+   617→              href="tel:+213555123456"
+   618→              className="border-2 border-white text-white hover:bg-white hover:text-red-600 px-8 py-3 rounded-lg font-bold transition-all text-base"
+   619→            >
+   620→              <span className="flex items-center gap-2">
+   621→                <Phone className="w-5 h-5" />
+   622→                +213 555 123 456
+   623→              </span>
+   624→            </a>
+   625→          </div>
+   626→        </div>
+   627→      </section>
+   628→
+   629→      {/* ═══════════ HOURS BAND ═══════════ */}
+   630→      <div className="bg-red-700 py-3">
+   631→        <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-3 text-white text-sm font-medium">
+   632→          <Clock className="w-4 h-4" />
+   633→          <span>Horaires : Dimanche — Jeudi, 9h — 18h</span>
+   634→        </div>
+   635→      </div>
+   636→
+   637→      {/* ═══════════ CONTACT ═══════════ */}
+   638→      <section id="contact" className="py-20 sm:py-28 bg-gray-900 text-white">
+   639→        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+   640→          <div className="text-center mb-14">
+   641→            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">
+   642→              CONTACTEZ-<span className="text-red-500">NOUS</span>
+   643→            </h2>
+   644→            <p className="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
+   645→              N&apos;hésitez pas à nous joindre pour toute question ou demande de
+   646→              devis. Nous sommes à votre écoute.
+   647→            </p>
+   648→          </div>
+   649→
+   650→          <div className="grid sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
+   651→            {/* Address */}
+   652→            <div className="flex flex-col items-center text-center p-6 rounded-xl bg-gray-800/50 border border-gray-700">
+   653→              <div className="w-12 h-12 rounded-full bg-red-600/20 flex items-center justify-center mb-4">
+   654→                <MapPin className="w-6 h-6 text-red-500" />
+   655→              </div>
+   656→              <h3 className="font-bold text-sm mb-1 text-gray-300 uppercase tracking-wider">
+   657→                Adresse
+   658→              </h3>
+   659→              <p className="text-gray-400 text-sm">Koléa, Tipaza, Algérie</p>
+   660→            </div>
+   661→
+   662→            {/* Phone */}
+   663→            <div className="flex flex-col items-center text-center p-6 rounded-xl bg-gray-800/50 border border-gray-700">
+   664→              <div className="w-12 h-12 rounded-full bg-red-600/20 flex items-center justify-center mb-4">
+   665→                <Phone className="w-6 h-6 text-red-500" />
+   666→              </div>
+   667→              <h3 className="font-bold text-sm mb-1 text-gray-300 uppercase tracking-wider">
+   668→                Téléphone
+   669→              </h3>
+   670→              <p className="text-gray-400 text-sm">+213 555 123 456</p>
+   671→            </div>
+   672→
+   673→            {/* Email */}
+   674→            <div className="flex flex-col items-center text-center p-6 rounded-xl bg-gray-800/50 border border-gray-700">
+   675→              <div className="w-12 h-12 rounded-full bg-red-600/20 flex items-center justify-center mb-4">
+   676→                <Mail className="w-6 h-6 text-red-500" />
+   677→              </div>
+   678→              <h3 className="font-bold text-sm mb-1 text-gray-300 uppercase tracking-wider">
+   679→                E-mail
+   680→              </h3>
+   681→              <p className="text-gray-400 text-sm">contact@artfact.dz</p>
+   682→            </div>
+   683→          </div>
+   684→        </div>
+   685→      </section>
+   686→
+   687→      {/* ═══════════ FOOTER ═══════════ */}
+   688→      <footer className="bg-gray-950 text-gray-400">
+   689→        {/* Main footer */}
+   690→        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+   691→          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+   692→            {/* Col 1 - Brand */}
+   693→            <div className="sm:col-span-2 lg:col-span-1">
+   694→              <div className="flex items-center gap-2 mb-4">
+   695→                <div className="relative w-8 h-8">
+   696→                  <Image
+   697→                    src="/branding-digital.png"
+   698→                    alt="art&fact"
+   699→                    fill
+   700→                    className="object-contain"
+   701→                  />
+   702→                </div>
+   703→                <span className="text-xl font-bold text-white">
+   704→                  art<span className="text-red-500">&amp;fact</span>
+   705→                </span>
+   706→              </div>
+   707→              <p className="text-sm leading-relaxed mb-4">
+   708→                Votre partenaire de confiance pour tous vos projets de
+   709→                signalétique, enseignes et communication visuelle à Koléa et
+   710→                dans la région de Tipaza.
+   711→              </p>
+   712→              <p className="text-xs text-gray-500">
+   713→                Koléa, Tipaza, Algérie
+   714→              </p>
+   715→            </div>
+   716→
+   717→            {/* Col 2 - Navigation */}
+   718→            <div>
+   719→              <h4 className="text-white font-bold text-sm mb-4 uppercase tracking-wider">
+   720→                Navigation
+   721→              </h4>
+   722→              <ul className="space-y-2 text-sm">
+   723→                {NAV_LINKS.map((l) => (
+   724→                  <li key={l.label}>
+   725→                    <a
+   726→                      href={l.href}
+   727→                      className="hover:text-red-400 transition-colors"
+   728→                    >
+   729→                      {l.label}
+   730→                    </a>
+   731→                  </li>
+   732→                ))}
+   733→              </ul>
+   734→            </div>
+   735→
+   736→            {/* Col 3 - Services */}
+   737→            <div>
+   738→              <h4 className="text-white font-bold text-sm mb-4 uppercase tracking-wider">
+   739→                Nos services
+   740→              </h4>
+   741→              <ul className="space-y-2 text-sm">
+   742→                {FOOTER_SERVICES.slice(0, 7).map((s) => (
+   743→                  <li key={s}>
+   744→                    <a
+   745→                      href="#services"
+   746→                      className="hover:text-red-400 transition-colors"
+   747→                    >
+   748→                      {s}
+   749→                    </a>
+   750→                  </li>
+   751→                ))}
+   752→              </ul>
+   753→            </div>
+   754→
+   755→            {/* Col 4 - More services */}
+   756→            <div>
+   757→              <h4 className="text-white font-bold text-sm mb-4 uppercase tracking-wider">
+   758→                Expertises
+   759→              </h4>
+   760→              <ul className="space-y-2 text-sm">
+   761→                {FOOTER_SERVICES.slice(7).map((s) => (
+   762→                  <li key={s}>
+   763→                    <a
+   764→                      href="#services"
+   765→                      className="hover:text-red-400 transition-colors"
+   766→                    >
+   767→                      {s}
+   768→                    </a>
+   769→                  </li>
+   770→                ))}
+   771→              </ul>
+   772→            </div>
+   773→          </div>
+   774→        </div>
+   775→
+   776→        {/* Service links band */}
+   777→        <div className="border-t border-gray-800 bg-gray-900/50">
+   778→          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+   779→            <div className="flex flex-wrap justify-center gap-3">
+   780→              {FOOTER_SERVICES.map((s) => (
+   781→                <a
+   782→                  key={s}
+   783→                  href="#services"
+   784→                  className="text-xs font-medium bg-red-600/10 text-red-400 hover:bg-red-600 hover:text-white px-3 py-1.5 rounded-full transition-all"
+   785→                >
+   786→                  {s}
+   787→                </a>
+   788→              ))}
+   789→            </div>
+   790→          </div>
+   791→        </div>
+   792→
+   793→        {/* Bottom bar */}
+   794→        <div className="border-t border-gray-800">
+   795→          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500">
+   796→            <span>
+   797→              &copy; {new Date().getFullYear()} art&amp;fact — Tous droits
+   798→              réservés
+   799→            </span>
+   800→            <div className="flex items-center gap-4">
+   801→              <a
+   802→                href="#"
+   803→                className="hover:text-red-400 transition-colors"
+   804→              >
+   805→                Mentions légales
+   806→              </a>
+   807→              <a
+   808→                href="#"
+   809→                className="hover:text-red-400 transition-colors"
+   810→              >
+   811→                Politique de confidentialité
+   812→              </a>
+   813→            </div>
+   814→          </div>
+   815→        </div>
+   816→      </footer>
+   817→
+   818→      {/* ═══════════ SCROLL TO TOP ═══════════ */}
+   819→      {showTop && (
+   820→        <button
+   821→          onClick={() =>
+   822→            topRef.current?.scrollIntoView({ behavior: 'smooth' })
+   823→          }
+   824→          className="fixed bottom-6 right-6 z-50 w-12 h-12 bg-red-600 hover:bg-red-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all"
+   825→          aria-label="Retour en haut"
+   826→        >
+   827→          <ArrowUp className="w-5 h-5" />
+   828→        </button>
+   829→      )}
+   830→    </div>
+   831→  );
+   832→}

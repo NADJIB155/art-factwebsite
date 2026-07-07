@@ -32,53 +32,62 @@ const NAV_LINKS = [
 /* ────────────────────────────────────────────
    SERVICES DATA
    ──────────────────────────────────────────── */
+const WORK_IMAGES = [
+  '/work-1.jpeg',
+  '/work-2.jpeg',
+  '/work-3.jpeg',
+  '/work-4.jpeg',
+  '/work-5.jpeg',
+  '/work-6.jpeg',
+];
+
 const SERVICES = [
   {
     title: 'Signalétique & Enseignes',
     desc: "Conception, fabrication et pose d'enseignes professionnelles sur mesure pour donner vie à votre identité de marque.",
-    img: '/branding-creations.png',
+    img: '/work-1.jpeg',
     tag: 'Enseignes',
   },
   {
     title: 'Enseignes Déployantes',
     desc: "Des enseignes à bras déployant, légères et résistantes, idéales pour capter l'attention en toute circonstance.",
-    img: '/branding-communication.png',
+    img: '/work-2.jpeg',
     tag: 'Déployantes',
   },
   {
     title: 'Habillage Véhicule',
     desc: 'Transformez vos véhicules en supports publicitaires mobiles grâce à nos solutions de covering haute définition.',
-    img: '/branding-digital.png',
+    img: '/work-3.jpeg',
     tag: 'Covering',
   },
   {
     title: 'Habillage Mural & Façade',
     desc: 'Mettez en valeur vos surfaces avec des habillages muraux percutants qui renforcent votre présence locale.',
-    img: '/branding-creations.png',
+    img: '/work-4.jpeg',
     tag: 'Mural',
   },
   {
     title: 'Stores & Bannes',
     desc: 'Stores commerciaux et bannes publicitaires personnalisés, alliant esthétique et protection solaire.',
-    img: '/branding-communication.png',
+    img: '/work-5.jpeg',
     tag: 'Stores',
   },
   {
     title: 'Plaques & Identification',
     desc: 'Plaques professionnelles, signalétique intérieure et extérieure pour une identification claire et durable.',
-    img: '/branding-digital.png',
+    img: '/work-6.jpeg',
     tag: 'Identification',
   },
   {
     title: "Aménagement d'Espaces",
     desc: "Agencement de stands, vitrines et espaces commerciaux pour sublimer votre activité et attirer la clientèle.",
-    img: '/branding-creations.png',
+    img: '/work-1.jpeg',
     tag: 'Aménagement',
   },
   {
     title: 'Stand & Événementiel',
     desc: 'Conception et montage de stands pour salons, foires et événements professionnels avec un rendu soigné.',
-    img: '/branding-communication.png',
+    img: '/work-2.jpeg',
     tag: 'Événementiel',
   },
 ];
@@ -187,7 +196,7 @@ export default function HomePage() {
           <a href="#accueil" className="flex items-center gap-3 group">
             <div className="relative w-10 h-10 sm:w-12 sm:h-12">
               <Image
-                src="/branding-digital.png"
+                src="/logo-artfact.png"
                 alt="art&fact logo"
                 fill
                 className="object-contain"
@@ -286,23 +295,17 @@ export default function HomePage() {
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-red-600" />
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center pt-20">
-          {/* Branding logos row */}
-          <div className="flex items-center justify-center gap-4 sm:gap-8 mb-10">
-            {['/branding-digital.png', '/branding-creations.png', '/branding-communication.png'].map(
-              (src, i) => (
-                <div
-                  key={i}
-                  className="w-16 h-16 sm:w-20 sm:h-20 relative opacity-80 hover:opacity-100 transition-opacity"
-                >
-                  <Image
-                    src={src}
-                    alt="art&fact branding"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              )
-            )}
+          {/* Single Logo */}
+          <div className="flex items-center justify-center mb-10">
+            <div className="w-28 h-28 sm:w-36 sm:h-36 relative">
+              <Image
+                src="/logo-artfact.png"
+                alt="art&fact logo"
+                fill
+                className="object-contain drop-shadow-2xl"
+                priority
+              />
+            </div>
           </div>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight mb-6">
@@ -399,8 +402,8 @@ export default function HomePage() {
             {/* Image */}
             <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]">
               <Image
-                src="/branding-creations.png"
-                alt="Réalisation art&fact - Signalétique professionnelle"
+                src="/work-1.jpeg"
+                alt="Réalisation art&fact - Enseigne professionnelle"
                 fill
                 className="object-cover"
               />
@@ -515,6 +518,42 @@ export default function HomePage() {
                 <p className="text-gray-500 text-sm leading-relaxed">
                   {item.desc}
                 </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════ PORTFOLIO GALLERY ═══════════ */}
+      <section className="py-20 sm:py-28 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
+              NOS <span className="text-red-600">RÉALISATIONS</span>
+            </h2>
+            <p className="text-gray-500 max-w-2xl mx-auto text-sm sm:text-base">
+              Découvrez quelques-unes de nos réalisations récentes en signalétique, enseignes et communication visuelle.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+            {WORK_IMAGES.map((img, i) => (
+              <div
+                key={i}
+                className="group relative rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 aspect-[4/3]"
+              >
+                <Image
+                  src={img}
+                  alt={`Réalisation art&fact ${i + 1}`}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-white text-xs font-medium">
+                    Réalisation {i + 1}
+                  </span>
+                </div>
               </div>
             ))}
           </div>
@@ -694,7 +733,7 @@ export default function HomePage() {
               <div className="flex items-center gap-2 mb-4">
                 <div className="relative w-8 h-8">
                   <Image
-                    src="/branding-digital.png"
+                    src="/logo-artfact.png"
                     alt="art&fact"
                     fill
                     className="object-contain"

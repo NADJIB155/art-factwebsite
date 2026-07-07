@@ -45,7 +45,7 @@ const SERVICES = [
   {
     title: 'Signalétique & Enseignes',
     desc: "Conception, fabrication et pose d'enseignes professionnelles sur mesure pour donner vie à votre identité de marque.",
-    img: '/work-1.jpeg',
+    img: '/work-6.jpeg',
     tag: 'Enseignes',
   },
   {
@@ -57,13 +57,13 @@ const SERVICES = [
   {
     title: 'Habillage Véhicule',
     desc: 'Transformez vos véhicules en supports publicitaires mobiles grâce à nos solutions de covering haute définition.',
-    img: '/work-3.jpeg',
+    img: '/gen-vehicle-covering.png',
     tag: 'Covering',
   },
   {
     title: 'Habillage Mural & Façade',
     desc: 'Mettez en valeur vos surfaces avec des habillages muraux percutants qui renforcent votre présence locale.',
-    img: '/work-4.jpeg',
+    img: '/work-1.jpeg',
     tag: 'Mural',
   },
   {
@@ -75,19 +75,19 @@ const SERVICES = [
   {
     title: 'Plaques & Identification',
     desc: 'Plaques professionnelles, signalétique intérieure et extérieure pour une identification claire et durable.',
-    img: '/work-6.jpeg',
+    img: '/gen-plaque-pro.png',
     tag: 'Identification',
   },
   {
     title: "Aménagement d'Espaces",
     desc: "Agencement de stands, vitrines et espaces commerciaux pour sublimer votre activité et attirer la clientèle.",
-    img: '/work-1.jpeg',
+    img: '/gen-amenagement.png',
     tag: 'Aménagement',
   },
   {
     title: 'Stand & Événementiel',
     desc: 'Conception et montage de stands pour salons, foires et événements professionnels avec un rendu soigné.',
-    img: '/work-2.jpeg',
+    img: '/gen-stand-evenement.png',
     tag: 'Événementiel',
   },
 ];

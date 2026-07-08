@@ -204,7 +204,7 @@ export default function HomePage() {
               />
             </div>
             <div className="flex flex-col leading-tight">
-              <span className="text-xl sm:text-2xl font-bold tracking-tight text-red-600">
+              <span className="text-xl sm:text-2xl font-bold tracking-tight text-teal-600">
                 art<span className="text-gray-800">&amp;fact</span>
               </span>
               <span className="text-[10px] sm:text-xs text-gray-500 tracking-wide uppercase">
@@ -219,7 +219,7 @@ export default function HomePage() {
               <li key={link.label}>
                 <a
                   href={link.href}
-                  className="text-sm font-medium text-gray-700 hover:text-red-600 transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-red-600 after:transition-all hover:after:w-full"
+                  className="text-sm font-medium text-gray-700 hover:text-teal-600 transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-teal-600 after:transition-all hover:after:w-full"
                 >
                   {link.label}
                 </a>
@@ -230,7 +230,7 @@ export default function HomePage() {
           {/* Desktop CTA */}
           <a
             href="tel:+213555123456"
-            className="hidden lg:flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors"
+            className="hidden lg:flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors"
           >
             <Phone className="w-4 h-4" />
             Nous appeler
@@ -255,7 +255,7 @@ export default function HomePage() {
                   <a
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="block py-3 px-3 text-sm font-medium text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    className="block py-3 px-3 text-sm font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50 rounded-lg transition-colors"
                   >
                     {link.label}
                   </a>
@@ -264,7 +264,7 @@ export default function HomePage() {
               <li className="pt-3 border-t border-gray-100">
                 <a
                   href="tel:+213555123456"
-                  className="flex items-center gap-2 justify-center bg-red-600 text-white py-3 rounded-lg text-sm font-semibold"
+                  className="flex items-center gap-2 justify-center bg-teal-600 text-white py-3 rounded-lg text-sm font-semibold"
                 >
                   <Phone className="w-4 h-4" />
                   Nous appeler
@@ -292,7 +292,7 @@ export default function HomePage() {
         </div>
 
         {/* Red accent bar top */}
-        <div className="absolute top-0 left-0 right-0 h-1.5 bg-red-600" />
+        <div className="absolute top-0 left-0 right-0 h-1.5 bg-teal-600" />
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center pt-20">
           {/* Single Logo */}
@@ -310,10 +310,10 @@ export default function HomePage() {
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight mb-6">
             ENSEIGNES, HABILLAGE{' '}
-            <span className="text-red-500">ET</span> COMMUNICATION VISUELLE
+            <span className="text-teal-500">ET</span> COMMUNICATION VISUELLE
           </h1>
 
-          <p className="text-lg sm:text-xl text-red-400 font-semibold mb-4 tracking-wide">
+          <p className="text-lg sm:text-xl text-teal-400 font-semibold mb-4 tracking-wide">
             KOLÉA ET LA RÉGION DE TIPAZA
           </p>
 
@@ -326,14 +326,14 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="tel:+213555123456"
-              className="flex items-center gap-2 border-2 border-red-500 text-red-400 hover:bg-red-500 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all text-base"
+              className="flex items-center gap-2 border-2 border-teal-500 text-teal-400 hover:bg-teal-500 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all text-base"
             >
               <Phone className="w-5 h-5" />
               +213 555 123 456
             </a>
             <a
               href="#contact"
-              className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors text-base"
+              className="flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors text-base"
             >
               <Mail className="w-5 h-5" />
               Nous contacter
@@ -355,12 +355,12 @@ export default function HomePage() {
       <section id="about" className="py-20 sm:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Red top bar */}
-          <div className="w-full h-1.5 bg-red-600 mb-12 rounded-full" />
+          <div className="w-full h-1.5 bg-teal-600 mb-12 rounded-full" />
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Text */}
             <div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-red-600 mb-3 leading-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-teal-600 mb-3 leading-tight">
                 VOTRE PARTENAIRE POUR UNE VISIBILITÉ LOCALE DURABLE
               </h2>
               <p className="text-gray-400 text-sm sm:text-base mb-6 font-medium">
@@ -409,7 +409,7 @@ export default function HomePage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
-                <span className="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded">
+                <span className="bg-teal-600 text-white text-xs font-bold px-3 py-1 rounded">
                   NOS RÉALISATIONS
                 </span>
               </div>
@@ -423,7 +423,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
-              NOS <span className="text-red-600">DOMAINES</span>{' '}
+              NOS <span className="text-teal-600">DOMAINES</span>{' '}
               D&apos;EXPERTISE
             </h2>
             <p className="text-gray-500 max-w-2xl mx-auto text-sm sm:text-base">
@@ -446,7 +446,7 @@ export default function HomePage() {
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-3 left-3">
-                    <span className="bg-red-600/90 text-white text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded">
+                    <span className="bg-teal-600/90 text-white text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded">
                       {s.tag}
                     </span>
                   </div>
@@ -470,7 +470,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
-              POURQUOI <span className="text-red-600">CHOISIR</span> ART&amp;FACT ?
+              POURQUOI <span className="text-teal-600">CHOISIR</span> ART&amp;FACT ?
             </h2>
           </div>
 
@@ -509,7 +509,7 @@ export default function HomePage() {
             ].map((item, i) => (
               <div
                 key={i}
-                className="text-center p-6 rounded-xl bg-gray-50 hover:bg-red-50 transition-colors group"
+                className="text-center p-6 rounded-xl bg-gray-50 hover:bg-teal-50 transition-colors group"
               >
                 <div className="text-4xl mb-4">{item.icon}</div>
                 <h3 className="font-bold text-gray-900 mb-2 text-base sm:text-lg">
@@ -529,7 +529,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
-              NOS <span className="text-red-600">RÉALISATIONS</span>
+              NOS <span className="text-teal-600">RÉALISATIONS</span>
             </h2>
             <p className="text-gray-500 max-w-2xl mx-auto text-sm sm:text-base">
               Découvrez quelques-unes de nos réalisations récentes en signalétique, enseignes et communication visuelle.
@@ -580,7 +580,7 @@ export default function HomePage() {
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
               CE QUE DISENT{' '}
-              <span className="text-red-600">NOS CLIENTS</span>
+              <span className="text-teal-600">NOS CLIENTS</span>
             </h2>
           </div>
 
@@ -603,8 +603,8 @@ export default function HomePage() {
                   &ldquo;{r.text}&rdquo;
                 </p>
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-red-100 flex items-center justify-center">
-                    <span className="text-red-600 font-bold text-sm">
+                  <div className="w-9 h-9 rounded-full bg-teal-100 flex items-center justify-center">
+                    <span className="text-teal-600 font-bold text-sm">
                       {r.name.charAt(0)}
                     </span>
                   </div>
@@ -624,7 +624,7 @@ export default function HomePage() {
                 onClick={() => setActiveReviewPage(i)}
                 className={`w-3 h-3 rounded-full transition-all ${
                   i === activeReviewPage
-                    ? 'bg-red-600 w-8'
+                    ? 'bg-teal-600 w-8'
                     : 'bg-gray-300 hover:bg-gray-400'
                 }`}
                 aria-label={`Page ${i + 1}`}
@@ -635,12 +635,12 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════ CTA BAND ═══════════ */}
-      <section className="bg-red-600 py-12 sm:py-16">
+      <section className="bg-teal-600 py-12 sm:py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
             UN PROJET EN TÊTE ?
           </h2>
-          <p className="text-red-100 text-sm sm:text-base mb-8 max-w-2xl mx-auto">
+          <p className="text-teal-100 text-sm sm:text-base mb-8 max-w-2xl mx-auto">
             Contactez-nous dès maintenant pour un devis gratuit et
             personnalisé. Notre équipe se fera un plaisir de vous accompagner
             dans la réalisation de votre projet.
@@ -648,13 +648,13 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#contact"
-              className="bg-white text-red-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-bold transition-colors text-base"
+              className="bg-white text-teal-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-bold transition-colors text-base"
             >
               Demander un devis
             </a>
             <a
               href="tel:+213555123456"
-              className="border-2 border-white text-white hover:bg-white hover:text-red-600 px-8 py-3 rounded-lg font-bold transition-all text-base"
+              className="border-2 border-white text-white hover:bg-white hover:text-teal-600 px-8 py-3 rounded-lg font-bold transition-all text-base"
             >
               <span className="flex items-center gap-2">
                 <Phone className="w-5 h-5" />
@@ -666,7 +666,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════ HOURS BAND ═══════════ */}
-      <div className="bg-red-700 py-3">
+      <div className="bg-teal-700 py-3">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-3 text-white text-sm font-medium">
           <Clock className="w-4 h-4" />
           <span>Horaires : Dimanche — Jeudi, 9h — 18h</span>
@@ -678,7 +678,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">
-              CONTACTEZ-<span className="text-red-500">NOUS</span>
+              CONTACTEZ-<span className="text-teal-500">NOUS</span>
             </h2>
             <p className="text-gray-400 max-w-xl mx-auto text-sm sm:text-base">
               N&apos;hésitez pas à nous joindre pour toute question ou demande de
@@ -689,8 +689,8 @@ export default function HomePage() {
           <div className="grid sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {/* Address */}
             <div className="flex flex-col items-center text-center p-6 rounded-xl bg-gray-800/50 border border-gray-700">
-              <div className="w-12 h-12 rounded-full bg-red-600/20 flex items-center justify-center mb-4">
-                <MapPin className="w-6 h-6 text-red-500" />
+              <div className="w-12 h-12 rounded-full bg-teal-600/20 flex items-center justify-center mb-4">
+                <MapPin className="w-6 h-6 text-teal-500" />
               </div>
               <h3 className="font-bold text-sm mb-1 text-gray-300 uppercase tracking-wider">
                 Adresse
@@ -700,8 +700,8 @@ export default function HomePage() {
 
             {/* Phone */}
             <div className="flex flex-col items-center text-center p-6 rounded-xl bg-gray-800/50 border border-gray-700">
-              <div className="w-12 h-12 rounded-full bg-red-600/20 flex items-center justify-center mb-4">
-                <Phone className="w-6 h-6 text-red-500" />
+              <div className="w-12 h-12 rounded-full bg-teal-600/20 flex items-center justify-center mb-4">
+                <Phone className="w-6 h-6 text-teal-500" />
               </div>
               <h3 className="font-bold text-sm mb-1 text-gray-300 uppercase tracking-wider">
                 Téléphone
@@ -711,8 +711,8 @@ export default function HomePage() {
 
             {/* Email */}
             <div className="flex flex-col items-center text-center p-6 rounded-xl bg-gray-800/50 border border-gray-700">
-              <div className="w-12 h-12 rounded-full bg-red-600/20 flex items-center justify-center mb-4">
-                <Mail className="w-6 h-6 text-red-500" />
+              <div className="w-12 h-12 rounded-full bg-teal-600/20 flex items-center justify-center mb-4">
+                <Mail className="w-6 h-6 text-teal-500" />
               </div>
               <h3 className="font-bold text-sm mb-1 text-gray-300 uppercase tracking-wider">
                 E-mail
@@ -740,7 +740,7 @@ export default function HomePage() {
                   />
                 </div>
                 <span className="text-xl font-bold text-white">
-                  art<span className="text-red-500">&amp;fact</span>
+                  art<span className="text-teal-500">&amp;fact</span>
                 </span>
               </div>
               <p className="text-sm leading-relaxed mb-4">
@@ -763,7 +763,7 @@ export default function HomePage() {
                   <li key={l.label}>
                     <a
                       href={l.href}
-                      className="hover:text-red-400 transition-colors"
+                      className="hover:text-teal-400 transition-colors"
                     >
                       {l.label}
                     </a>
@@ -782,7 +782,7 @@ export default function HomePage() {
                   <li key={s}>
                     <a
                       href="#services"
-                      className="hover:text-red-400 transition-colors"
+                      className="hover:text-teal-400 transition-colors"
                     >
                       {s}
                     </a>
@@ -801,7 +801,7 @@ export default function HomePage() {
                   <li key={s}>
                     <a
                       href="#services"
-                      className="hover:text-red-400 transition-colors"
+                      className="hover:text-teal-400 transition-colors"
                     >
                       {s}
                     </a>
@@ -820,7 +820,7 @@ export default function HomePage() {
                 <a
                   key={s}
                   href="#services"
-                  className="text-xs font-medium bg-red-600/10 text-red-400 hover:bg-red-600 hover:text-white px-3 py-1.5 rounded-full transition-all"
+                  className="text-xs font-medium bg-teal-600/10 text-teal-400 hover:bg-teal-600 hover:text-white px-3 py-1.5 rounded-full transition-all"
                 >
                   {s}
                 </a>
@@ -839,13 +839,13 @@ export default function HomePage() {
             <div className="flex items-center gap-4">
               <a
                 href="#"
-                className="hover:text-red-400 transition-colors"
+                className="hover:text-teal-400 transition-colors"
               >
                 Mentions légales
               </a>
               <a
                 href="#"
-                className="hover:text-red-400 transition-colors"
+                className="hover:text-teal-400 transition-colors"
               >
                 Politique de confidentialité
               </a>
@@ -860,7 +860,7 @@ export default function HomePage() {
           onClick={() =>
             topRef.current?.scrollIntoView({ behavior: 'smooth' })
           }
-          className="fixed bottom-6 right-6 z-50 w-12 h-12 bg-red-600 hover:bg-red-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all"
+          className="fixed bottom-6 right-6 z-50 w-12 h-12 bg-teal-600 hover:bg-teal-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all"
           aria-label="Retour en haut"
         >
           <ArrowUp className="w-5 h-5" />

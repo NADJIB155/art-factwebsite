@@ -13,6 +13,8 @@ import {
   ArrowUp,
   Clock,
   CheckCircle,
+  Facebook,
+  Instagram,
 } from 'lucide-react';
 
 /* ────────────────────────────────────────────
@@ -89,6 +91,24 @@ const SERVICES = [
     desc: 'Conception et montage de stands pour salons, foires et événements professionnels avec un rendu soigné.',
     img: '/gen-stand-evenement.png',
     tag: 'Événementiel',
+  },
+  {
+    title: 'Découpe & Sculptures Métalliques',
+    desc: 'Créations artistiques et lettrages en métal découpé pour apporter une touche moderne et élégante à votre espace.',
+    img: '/service-metal-sculpture.jpg',
+    tag: 'Métal',
+  },
+  {
+    title: 'Présentoirs & Chevalets de Table',
+    desc: 'Supports de table personnalisés et design en métal plié, parfaits pour vos menus ou QR codes.',
+    img: '/service-metal-stands.jpg',
+    tag: 'Présentoirs',
+  },
+  {
+    title: 'Plaques Décoratives en Acrylique',
+    desc: 'Disques et plaques en acrylique teinté, idéaux pour la signalétique intérieure de luxe.',
+    img: '/service-acrylic-circles.jpg',
+    tag: 'Acrylique',
   },
 ];
 
@@ -229,7 +249,7 @@ export default function HomePage() {
 
           {/* Desktop CTA */}
           <a
-            href="tel:+213555123456"
+            href="tel:0784827191"
             className="hidden lg:flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors"
           >
             <Phone className="w-4 h-4" />
@@ -263,7 +283,7 @@ export default function HomePage() {
               ))}
               <li className="pt-3 border-t border-gray-100">
                 <a
-                  href="tel:+213555123456"
+                  href="tel:0784827191"
                   className="flex items-center gap-2 justify-center bg-teal-600 text-white py-3 rounded-lg text-sm font-semibold"
                 >
                   <Phone className="w-4 h-4" />
@@ -325,11 +345,11 @@ export default function HomePage() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="tel:+213555123456"
+              href="tel:0784827191"
               className="flex items-center gap-2 border-2 border-teal-500 text-teal-400 hover:bg-teal-500 hover:text-white px-8 py-3 rounded-lg font-semibold transition-all text-base"
             >
               <Phone className="w-5 h-5" />
-              +213 555 123 456
+              07 84 82 71 91
             </a>
             <a
               href="#contact"
@@ -653,12 +673,12 @@ export default function HomePage() {
               Demander un devis
             </a>
             <a
-              href="tel:+213555123456"
+              href="tel:0784827191"
               className="border-2 border-white text-white hover:bg-white hover:text-teal-600 px-8 py-3 rounded-lg font-bold transition-all text-base"
             >
               <span className="flex items-center gap-2">
                 <Phone className="w-5 h-5" />
-                +213 555 123 456
+                07 84 82 71 91
               </span>
             </a>
           </div>
@@ -706,7 +726,7 @@ export default function HomePage() {
               <h3 className="font-bold text-sm mb-1 text-gray-300 uppercase tracking-wider">
                 Téléphone
               </h3>
-              <p className="text-gray-400 text-sm">+213 555 123 456</p>
+              <p className="text-gray-400 text-sm">07 84 82 71 91</p>
             </div>
 
             {/* Email */}
@@ -837,6 +857,24 @@ export default function HomePage() {
               réservés
             </span>
             <div className="flex items-center gap-4">
+              <a
+                href="https://www.facebook.com/people/Tifinart-13016/100083540553944/"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-teal-400 transition-colors"
+                title="Facebook"
+              >
+                <Facebook className="w-4 h-4" />
+              </a>
+              <a
+                href="#"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-teal-400 transition-colors"
+                title="Instagram"
+              >
+                <Instagram className="w-4 h-4" />
+              </a>
               <a
                 href="#"
                 className="hover:text-teal-400 transition-colors"
